@@ -20,6 +20,7 @@ const searchInput  = document.getElementById('search');
 const gridAll      = document.getElementById('grid-all');
 const gridPicks    = document.getElementById('grid-picks');
 const gridGoogle   = document.getElementById('grid-google');
+const gridCustom   = document.getElementById('grid-custom');
 const btnMore      = document.getElementById('btn-more');
 const btnSend      = document.getElementById('btn-send');
 const btnCopy      = document.getElementById('btn-copy');
@@ -161,10 +162,12 @@ function switchTab(tab) {
   document.getElementById('tab-all').style.display    = tab === 'all'    ? '' : 'none';
   document.getElementById('tab-picks').style.display  = tab === 'picks'  ? '' : 'none';
   document.getElementById('tab-google').style.display = tab === 'google' ? '' : 'none';
+  document.getElementById('tab-custom').style.display = tab === 'custom' ? '' : 'none';
   filterSec.style.display = tab === 'all' ? '' : 'none';
 
   if (tab === 'picks')  renderPicks();
   if (tab === 'google') renderGoogleTop();
+  if (tab === 'custom') renderCustom();
 }
 
 // ── RENDER: ALL ───────────────────────────────────────────────
@@ -196,6 +199,23 @@ function renderPicks() {
   const names  = CONFIG.companyFavourites || [];
   const picked = names.map(n => FONTS.find(f => f.name === n)).filter(Boolean);
   picked.forEach(f => { loadGoogleFont(f.name); gridPicks.appendChild(makeCard(f)); });
+}
+
+// ── RENDER: CUSTOM FONTS ────────────────────────────────────
+function renderCustom() {
+  gridCustom.innerHTML = "";
+  const empty = document.getElementById("empty-custom");
+  const fonts = (typeof CUSTOM_FONTS !== "undefined") ? CUSTOM_FONTS : [];
+
+  if (!fonts.length) {
+    empty.style.display = "";
+    return;
+  }
+  empty.style.display = "none";
+  fonts.forEach(f => {
+    loadLocalFont(f.name, f.file);
+    gridCustom.appendChild(makeCard({ name: f.name, cat: "custom" }));
+  });
 }
 
 // ── RENDER: GOOGLE TOP ────────────────────────────────────────
@@ -364,3 +384,16 @@ function init() {
 }
 
 init();
+
+// ── LOCAL FONT LOADING ────────────────────────────────────────
+function loadLocalFont(name, file) {
+  if (loadedFonts.has(name)) return;
+  loadedFonts.add(name);
+  const style = document.createElement('style');
+  style.textContent = `@font-face {
+    font-family: '${name}';
+    src: url('fonts/${file}');
+    font-display: swap;
+  }`;
+  document.head.appendChild(style);
+}

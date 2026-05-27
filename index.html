@@ -50,8 +50,9 @@
     <section class="tabs-section">
       <div class="tabs" role="tablist">
         <button class="tab active" data-tab="all" role="tab">All Fonts</button>
-        <button class="tab" data-tab="picks" role="tab">Company Picks</button>
+        <button class="tab" data-tab="picks" role="tab">Community Favorites</button>
         <button class="tab" data-tab="google" role="tab">Top Picks</button>
+        <button class="tab" data-tab="custom" role="tab">Custom Fonts</button>
       </div>
     </section>
 
@@ -83,10 +84,17 @@
       </button>
     </section>
 
-    <!-- Company Picks tab -->
+    <!-- Community Favorites tab -->
     <section class="grid-section" id="tab-picks" style="display:none">
-      <div class="section-desc"> Our Signature Fonts </div>
+      <div class="section-desc">Community favorites</div>
       <div class="font-grid" id="grid-picks"></div>
+    </section>
+
+    <!-- Custom Fonts tab -->
+    <section class="grid-section" id="tab-custom" style="display:none">
+      <div class="section-desc">More Fonts.</div>
+      <div class="font-grid" id="grid-custom"></div>
+      <p class="empty-custom" id="empty-custom" style="display:none">No custom fonts found. Add font files to the <code>/fonts/</code> folder and run <code>node scan-fonts.js</code>.</p>
     </section>
 
     <!-- Google Top Picks tab -->
@@ -148,6 +156,7 @@
     </div>
   </div>
 
+  <script src="fonts-manifest.js"></script>
   <script src="config.js"></script>
   <script src="fonts-data.js"></script>
   <script src="app.js"></script>
