@@ -1,10 +1,7 @@
 @echo off
 echo.
-echo  Google Fonts Generator
-echo  ----------------------
-echo  You need a free Google Fonts API key to run this.
-echo  Get one at: https://console.cloud.google.com/apis/credentials
-echo.
-set /p KEY="Paste your API key here and press Enter: "
+echo  YourApron — Google Fonts Generator
+echo  ------------------------------------
+set /p KEY="Paste your Google Fonts API key: "
 node generate-fonts.js %KEY%
 pause

@@ -1,54 +1,65 @@
 // ============================================================
-//  config.js — Admin Configuration
-//  Edit this file to customize the tool.
+//  config.js — YourApron Admin Settings
 // ============================================================
 
 const CONFIG = {
 
-  // ── RECIPIENT EMAIL ───────────────────────────────────────
-  // Who receives the font requests
-  recipientEmail: 'nametags@yourcompany.com',
+  // Who receives the design requests
+  recipientEmail: 'replaceMe@example.com',
 
-  // ── NAMETAG PREVIEW MODE ──────────────────────────────────
-  // 'css'   → uses the built-in styled badge (no image needed)
-  // 'image' → uses a local image file as the badge background
-  nametagMode: 'css',
+  // Your Cash App $Cashtag (without $). Leave as 'YourCashtag' to hide the payment link.
+  cashAppTag: 'YourCashtag',
 
-  // ── IMAGE MODE SETTINGS ───────────────────────────────────
-  // Only relevant when nametagMode is 'image'
-  nametagImage: {
-    // Filename of your nametag image (place it in the same folder)
-    file: 'nametag.png',
+  // Cash App email address for payment (shown in order summary & email).
+  // Leave as 'YourCashAppEmail@example.com' to hide.
+  cashAppEmail: 'replaceMe@example.com',
 
-    // Aspect ratio of your image (width / height)
-    // Common badge sizes:
-    //   86mm × 54mm  → 1.59
-    //   100mm × 70mm → 1.43
-    //   90mm × 35mm  → 2.57
-    aspectRatio: 1.59,
-
-    // Where the name text sits on the image (as % of image size)
-    // Adjust these until the text lands on the right spot
-    textArea: {
-      top:    '38%',   // distance from top of image
-      left:   '8%',   // distance from left edge
-      width:  '84%',  // width of the text area
-    },
-
-    // Name text styling on the image
-    nameColor:  '#1a1917',   // text color
-    titleColor: '#6b6a66',   // title/position color
+  // Pricing per add-on (USD)
+  pricing: {
+    base:  0,   // Name only — always free
+    title: 1,   // Title / Department
+    icon:  1,   // Icon or uploaded image
+    color: 1,   // Any non-default vinyl color
   },
 
-  // ── COMPANY FAVOURITES ────────────────────────────────────
-  // These fonts appear in the "Company Picks" tab.
-  // Must match exact Google Fonts names.
-  companyFavourites: [
-    'Montserrat',
-    'Playfair Display',
-    'Raleway',
-    'Lora',
-    'Josefin Sans',
+  // Apron preview mode: 'css' = built-in orange badge, 'image' = your own photo
+  apronMode: 'css',
+
+  apronImage: {
+    file:        'apron-preview.png',
+    aspectRatio: 1.59,
+    textArea:    { top: '35%', left: '10%', width: '80%' },
+    nameColor:   '#ffffff',
+    titleColor:  'rgba(255,255,255,0.65)',
+  },
+
+  // Vinyl color chips — first one is the default (free)
+  vinylColors: [
+    { label: 'White',      value: '#ffffff' },
+    { label: 'Black',      value: '#1a1a1a' },
+    { label: 'Red',        value: '#dc2626' },
+    { label: 'Royal Blue', value: '#1d4ed8' },
+    { label: 'Gold',       value: '#eab308' },
+    { label: 'Silver',     value: '#9ca3af' },
+    { label: 'Green',      value: '#16a34a' },
+    { label: 'Pink',       value: '#ec4899' },
   ],
+
+  defaultVinylColor: '#ffffff',
+
+  // Fonts shown in Company Picks tab
+  companyFavourites: [
+    'Bebas Neue',
+    'Oswald',
+    'Barlow Condensed',
+    'Montserrat',
+    'Dancing Script',
+  ],
+
+  // Fonts hidden from all tabs
+  disabledFonts: [
+'examplefont01',
+'examplefont02',
+]
 
 };

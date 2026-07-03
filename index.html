@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Name Tag Font Selector</title>
+  <title>YourApron — Custom Apron Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,138 +19,197 @@
   </div>
   <div id="error-screen" class="state-screen" style="display:none">
     <div class="state-inner error">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       <p>Could not load font data.</p>
       <code id="error-message"></code>
-      <p class="error-hint">Run <strong>node generate-fonts.js YOUR_API_KEY</strong> first, then reload.</p>
+      <p class="error-hint">Run <strong>generate-fonts.bat</strong> first, then reload.</p>
     </div>
   </div>
 
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-eyebrow">Custom Apron Designer</div>
+        <h1 class="hero-title">YourApron</h1>
+        <p class="hero-sub">Pick your font, choose your color, send your order. Takes about 2 minutes.</p>
+      </div>
+      <div class="hero-img-wrap">
+        <img src="apron-hero.jpeg" alt="Example custom apron" class="hero-img">
+        <span class="hero-img-badge">Real example</span>
+      </div>
+    </div>
+  </header>
+
   <main class="main">
 
-    <!-- Input -->
-    <section class="input-section">
-      <div class="input-card">
-        <div class="input-card-header">
-          <h2>Your Details</h2>
-          <p>Enter the information that will appear on your name tag.</p>
-        </div>
+    <!-- ── STEP 1: Details ── -->
+    <section class="step-section">
+      <div class="step-label">
+        <span class="step-num">01</span>
+        Your details
+      </div>
+      <div class="card">
         <div class="input-row">
           <div class="input-group">
-            <label for="inp-name">Full Name</label>
-            <input type="text" id="inp-name" placeholder="e.g. Sarah Johnson" autocomplete="off">
+            <label for="inp-name">
+              Name
+              <span class="price-pill free-pill">FREE</span>
+            </label>
+            <input type="text" id="inp-name" placeholder="e.g. Keona" autocomplete="off">
           </div>
           <div class="input-group">
-            <label for="inp-title">Title / Position</label>
-            <input type="text" id="inp-title" placeholder="e.g. Project Manager" autocomplete="off">
+            <label for="inp-title">
+              Title / Department
+              <span class="opt-label">optional</span>
+              <span class="price-pill" id="ptag-title">+ $1.00</span>
+            </label>
+            <input type="text" id="inp-title" placeholder="e.g. Appliances" autocomplete="off">
+          </div>
+        </div>
+
+        <!-- Icon picker -->
+        <div class="subsection">
+          <div class="subsection-label">
+            Add an icon
+            <span class="opt-label">optional</span>
+            <span class="price-pill" id="ptag-icon">+ $1.00</span>
+          </div>
+          <div class="icon-switcher">
+            <button class="icon-tab active" data-itab="pick">Symbols</button>
+            <button class="icon-tab" data-itab="upload">Upload image</button>
+            <button class="btn-clear-icon" id="btn-clear-icon" style="display:none">✕ Remove</button>
+          </div>
+          <div id="ipanel-pick">
+            <div class="icon-grid" id="icon-grid"></div>
+          </div>
+          <div id="ipanel-upload" style="display:none">
+            <label class="upload-zone" id="upload-drop">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span>Drop image here or <u>browse</u></span>
+              <span class="upload-hint">PNG, JPG, SVG — transparent PNG works best</span>
+              <input type="file" id="icon-upload" accept="image/*" style="display:none">
+            </label>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Tabs -->
-    <section class="tabs-section">
-      <div class="tabs" role="tablist">
-        <button class="tab active" data-tab="all" role="tab">All Fonts</button>
-        <button class="tab" data-tab="picks" role="tab">Community Favorites</button>
-        <button class="tab" data-tab="google" role="tab">Top Picks</button>
-        <button class="tab" data-tab="custom" role="tab">Custom Fonts</button>
+    <!-- ── STEP 2: Color ── -->
+    <section class="step-section">
+      <div class="step-label">
+        <span class="step-num">02</span>
+        Vinyl color
+        <span class="price-pill" id="ptag-color">FREE if white</span>
+      </div>
+      <div class="card">
+        <div class="color-row">
+          <div class="color-chips" id="color-chips"></div>
+          <label class="custom-color-btn" for="color-custom">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+            Custom
+          </label>
+          <input type="color" id="color-custom" value="#ffffff">
+        </div>
+        <div class="color-selected">Color: <strong id="color-name">White</strong></div>
       </div>
     </section>
 
-    <!-- Filters (only in All tab) -->
-    <section class="filter-section" id="filter-section">
-      <div class="filter-row">
-        <div class="chips" id="cat-chips" role="group" aria-label="Filter by style">
+    <!-- ── STEP 3: Font ── -->
+    <section class="step-section">
+      <div class="step-label">
+        <span class="step-num">03</span>
+        Choose a font
+      </div>
+
+      <div class="tabs-bar">
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-tab="all">All Fonts</button>
+          <button class="tab" data-tab="picks">Company Picks</button>
+          <button class="tab" data-tab="top">Top Picks</button>
+          <button class="tab" data-tab="custom">Custom</button>
+        </div>
+        <span class="font-count" id="font-count"></span>
+      </div>
+
+      <!-- Filters (All tab only) -->
+      <div class="filters" id="filters">
+        <div class="cat-chips" id="cat-chips">
           <button class="chip active" data-cat="all">All</button>
           <button class="chip" data-cat="sans-serif">Sans-serif</button>
           <button class="chip" data-cat="serif">Serif</button>
           <button class="chip" data-cat="display">Display</button>
           <button class="chip" data-cat="handwriting">Handwriting</button>
-          <button class="chip" data-cat="monospace">Monospace</button>
+          <button class="chip" data-cat="monospace">Mono</button>
         </div>
         <div class="search-wrap">
-          <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="search" placeholder="Search fonts…" aria-label="Search fonts">
+          <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="search-input" placeholder="Search fonts…">
         </div>
       </div>
-      <div class="results-meta" id="results-meta">— fonts</div>
-    </section>
 
-    <!-- All Fonts tab -->
-    <section class="grid-section" id="tab-all">
-      <div class="font-grid" id="grid-all"></div>
-      <button class="btn-load-more" id="btn-more" style="display:none">
-        Load more fonts
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-    </section>
-
-    <!-- Community Favorites tab -->
-    <section class="grid-section" id="tab-picks" style="display:none">
-      <div class="section-desc">Community favorites</div>
-      <div class="font-grid" id="grid-picks"></div>
-    </section>
-
-    <!-- Custom Fonts tab -->
-    <section class="grid-section" id="tab-custom" style="display:none">
-      <div class="section-desc">More Fonts.</div>
-      <div class="font-grid" id="grid-custom"></div>
-      <p class="empty-custom" id="empty-custom" style="display:none">No custom fonts found. Add font files to the <code>/fonts/</code> folder and run <code>node scan-fonts.js</code>.</p>
-    </section>
-
-    <!-- Google Top Picks tab -->
-    <section class="grid-section" id="tab-google" style="display:none">
-      <div class="section-desc">Most popular fonts on Google Fonts, sorted by global usage.</div>
-      <div class="font-grid" id="grid-google"></div>
+      <!-- Font grids -->
+      <div class="tab-panel" id="tab-all">
+        <div class="font-grid" id="grid-all"></div>
+        <button class="btn-more" id="btn-more" style="display:none">
+          Load more
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+      </div>
+      <div class="tab-panel" id="tab-picks" style="display:none">
+        <p class="tab-desc">Recommended fonts for apron printing. Edit <code>config.js</code> to customize.</p>
+        <div class="font-grid" id="grid-picks"></div>
+      </div>
+      <div class="tab-panel" id="tab-top" style="display:none">
+        <p class="tab-desc">The 24 most popular fonts on Google Fonts worldwide.</p>
+        <div class="font-grid" id="grid-top"></div>
+      </div>
+      <div class="tab-panel" id="tab-custom" style="display:none">
+        <p class="tab-desc">Fonts from your <code>/fonts/</code> folder. Run <code>scan-fonts.bat</code> after adding files.</p>
+        <div class="font-grid" id="grid-custom"></div>
+        <p id="empty-custom" style="display:none;color:var(--text-3);font-size:13px;padding:1.5rem 0;font-family:var(--ui)">No custom fonts yet. Add .ttf or .woff2 files to <code>/fonts/</code> and run <code>scan-fonts.bat</code>.</p>
+      </div>
     </section>
 
   </main>
 
-  <!-- Sticky Result Bar -->
-  <div class="result-bar">
-    <div class="result-preview">
-      <div class="nametag-mini" id="result-nametag">
-        <span class="mini-name" id="result-mini-name">—</span>
-        <span class="mini-title" id="result-mini-title">—</span>
-      </div>
+  <!-- Result Bar -->
+  <footer class="result-bar">
+    <div class="rb-preview" id="rb-preview"></div>
+    <div class="rb-info">
+      <div class="rb-font" id="rb-font">Select a font above</div>
+      <div class="rb-breakdown" id="rb-breakdown"></div>
     </div>
-    <div class="result-meta">
-      <div class="result-font-name" id="result-font-name">Select a font above</div>
-      <div class="result-details" id="result-details"></div>
-    </div>
-    <div class="result-actions">
-      <button class="btn-copy" id="btn-copy" disabled>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+    <div class="rb-price" id="rb-price">$0.00</div>
+    <div class="rb-actions">
+      <button class="btn-ghost-white" id="btn-copy" disabled>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         Copy
       </button>
-      <button class="btn-send" id="btn-send" disabled>
-        Send request
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      <button class="btn-orange" id="btn-send" disabled>
+        Send order
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
       </button>
     </div>
-  </div>
+  </footer>
 
-  <!-- Send Modal -->
+  <!-- Modal -->
   <div class="modal-overlay" id="modal" style="display:none">
     <div class="modal">
       <div class="modal-header">
-        <h3>Send Font Request</h3>
+        <h3>Send Your Order</h3>
         <button class="modal-close" id="modal-close">✕</button>
       </div>
       <div class="modal-body">
-        <div class="modal-nametag" id="modal-nametag">
-          <span class="modal-name" id="modal-name-preview"></span>
-          <span class="modal-title-preview" id="modal-title-preview"></span>
-        </div>
-        <div class="modal-details" id="modal-details"></div>
-        <div class="modal-actions">
-          <a class="btn-mailto" id="btn-mailto" href="#">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        <div class="modal-preview" id="modal-preview"></div>
+        <div class="modal-rows" id="modal-rows"></div>
+        <div class="modal-btns">
+          <a class="btn-orange" id="btn-mailto" href="#">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
             Open in Mail
           </a>
-          <button class="btn-clipboard" id="btn-clipboard">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <button class="btn-outline" id="btn-clipboard">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
             Copy to clipboard
           </button>
         </div>
@@ -156,9 +217,9 @@
     </div>
   </div>
 
+  <script src="fonts-data.js"></script>
   <script src="fonts-manifest.js"></script>
   <script src="config.js"></script>
-  <script src="fonts-data.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
