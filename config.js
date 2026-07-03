@@ -7,7 +7,7 @@ const CONFIG = {
 
   // ── RECIPIENT EMAIL ───────────────────────────────────────
   // Who receives the font requests
-  recipientEmail: 'berdealcarlos@gmail.com',
+  recipientEmail: 'nametags@yourcompany.com',
 
   // ── NAMETAG PREVIEW MODE ──────────────────────────────────
   // 'css'   → uses the built-in styled badge (no image needed)
