@@ -12,7 +12,7 @@ const CONFIG = {
 
   // Cash App email address for payment (shown in order summary & email).
   // Leave as 'YourCashAppEmail@example.com' to hide.
-  cashAppEmail: 'replaceMe@example.com',
+  cashAppEmail: '4yourapronhd@gmail.com',
 
   // Pricing per add-on (USD)
   pricing: {
