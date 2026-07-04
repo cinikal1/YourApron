@@ -39,7 +39,7 @@ const CONFIG = {
     { label: 'Black',      value: '#1a1a1a' },
     { label: 'Red',        value: '#dc2626' },
     { label: 'Royal Blue', value: '#1d4ed8' },
-    { label: 'Gold',       value: '#eab308' },
+    { label: 'Yellow',       value: '#eab308' },
     { label: 'Silver',     value: '#9ca3af' },
     { label: 'Green',      value: '#16a34a' },
     { label: 'Pink',       value: '#ec4899' },
