@@ -5,7 +5,7 @@
 const CONFIG = {
 
   // Who receives the design requests
-  recipientEmail: 'replaceMe@example.com',
+  recipientEmail: '4yourapronhd@gmail.com',
 
   // Your Cash App $Cashtag (without $). Leave as 'YourCashtag' to hide the payment link.
   cashAppTag: 'YourCashtag',
