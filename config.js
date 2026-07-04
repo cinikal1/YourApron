@@ -8,7 +8,7 @@ const CONFIG = {
   recipientEmail: '4yourapronhd@gmail.com',
 
   // Your Cash App $Cashtag (without $). Leave as 'YourCashtag' to hide the payment link.
-  cashAppTag: 'YourCashtag',
+  cashAppTag: 'YourApron',
 
   // Cash App email address for payment (shown in order summary & email).
   // Leave as 'YourCashAppEmail@example.com' to hide.
